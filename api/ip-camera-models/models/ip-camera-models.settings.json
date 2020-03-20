@@ -1,0 +1,26 @@
+{
+  "kind": "collectionType",
+  "connection": "default",
+  "collectionName": "ip_camera_models",
+  "info": {
+    "name": "IPCameraModel"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "ModelName": {
+      "type": "string",
+      "unique": true
+    },
+    "SnapURL": {
+      "type": "string",
+      "required": true
+    },
+    "ip_cameras": {
+      "collection": "ip-cameras",
+      "via": "ip_camera_model"
+    }
+  }
+}

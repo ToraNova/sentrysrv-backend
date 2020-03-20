@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/draw-lines",
+      "handler": "draw-line.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/draw-lines/count",
+      "handler": "draw-line.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/draw-lines/:id",
+      "handler": "draw-line.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/draw-lines",
+      "handler": "draw-line.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/draw-lines/:id",
+      "handler": "draw-line.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/draw-lines/:id",
+      "handler": "draw-line.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

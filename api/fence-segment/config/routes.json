@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/fence-segments",
+      "handler": "fence-segment.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/fence-segments/count",
+      "handler": "fence-segment.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/fence-segments/:id",
+      "handler": "fence-segment.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/fence-segments",
+      "handler": "fence-segment.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/fence-segments/:id",
+      "handler": "fence-segment.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/fence-segments/:id",
+      "handler": "fence-segment.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

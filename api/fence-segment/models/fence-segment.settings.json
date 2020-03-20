@@ -1,0 +1,38 @@
+{
+  "kind": "collectionType",
+  "connection": "default",
+  "collectionName": "fence_segments",
+  "info": {
+    "name": "FenceSegment"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "SegmentName": {
+      "type": "string",
+      "unique": false
+    },
+    "fence_host": {
+      "via": "fence_segments",
+      "model": "fence-host"
+    },
+    "ip_cameras": {
+      "via": "fence_segment",
+      "collection": "ip-cameras"
+    },
+    "fence_sensors": {
+      "via": "fence_segment",
+      "collection": "fence-sensor"
+    },
+    "SegmentUID": {
+      "type": "uid",
+      "required": true
+    },
+    "draw_lines": {
+      "via": "fence_segment",
+      "collection": "draw-line"
+    }
+  }
+}

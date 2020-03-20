@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "connection": "default",
+  "collectionName": "fence_hosts",
+  "info": {
+    "name": "FenceHost"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "HostName": {
+      "type": "string",
+      "unique": false
+    },
+    "fence_segments": {
+      "collection": "fence-segment",
+      "via": "fence_host"
+    },
+    "HostUID": {
+      "type": "uid",
+      "targetField": "HostName",
+      "required": true
+    },
+    "LastHeard": {
+      "type": "datetime",
+      "required": false
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "connection": "default",
+  "collectionName": "fence_sensors",
+  "info": {
+    "name": "FenceSensor"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "sensor_model": {
+      "model": "sensor-model"
+    },
+    "fence_segment": {
+      "model": "fence-segment",
+      "via": "fence_sensors"
+    },
+    "SensorName": {
+      "type": "string",
+      "unique": false,
+      "required": false
+    },
+    "SensorUID": {
+      "type": "uid",
+      "required": true
+    }
+  }
+}

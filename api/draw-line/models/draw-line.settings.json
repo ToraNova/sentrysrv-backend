@@ -1,0 +1,26 @@
+{
+  "kind": "collectionType",
+  "connection": "default",
+  "collectionName": "draw_lines",
+  "info": {
+    "name": "DrawLine"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "Begin": {
+      "type": "json",
+      "required": true
+    },
+    "End": {
+      "type": "json",
+      "required": true
+    },
+    "fence_segment": {
+      "model": "fence-segment",
+      "via": "draw_lines"
+    }
+  }
+}

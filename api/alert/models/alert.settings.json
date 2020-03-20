@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "connection": "default",
+  "collectionName": "alerts",
+  "info": {
+    "name": "Alert"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "DateTime": {
+      "type": "datetime",
+      "required": true
+    },
+    "Reason": {
+      "type": "string",
+      "default": "UNREPORTED"
+    },
+    "fence_segment": {
+      "model": "fence-segment"
+    },
+    "sensor_model": {
+      "model": "sensor-model"
+    },
+    "AlertUID": {
+      "type": "uid",
+      "required": true
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/fence-hosts",
+      "handler": "fence-host.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/fence-hosts/count",
+      "handler": "fence-host.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/fence-hosts/:id",
+      "handler": "fence-host.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/fence-hosts",
+      "handler": "fence-host.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/fence-hosts/:id",
+      "handler": "fence-host.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/fence-hosts/:id",
+      "handler": "fence-host.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}
