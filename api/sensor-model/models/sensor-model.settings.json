@@ -3,7 +3,7 @@
   "connection": "default",
   "collectionName": "sensor_models",
   "info": {
-    "name": "SensorModel"
+    "name": "AlertModel"
   },
   "options": {
     "increments": true,
@@ -14,13 +14,6 @@
       "type": "string",
       "required": true,
       "unique": true
-    },
-    "TypeDefine": {
-      "unique": true,
-      "required": true,
-      "type": "integer",
-      "min": 0,
-      "max": 255
     }
   }
 }

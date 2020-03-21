@@ -19,8 +19,8 @@
       "unique": false
     },
     "ip_camera_model": {
-      "via": "ip_cameras",
-      "model": "ip-camera-models"
+      "model": "ip-camera-models",
+      "via": "ip_cameras"
     },
     "fence_segment": {
       "model": "fence-segment",
@@ -32,6 +32,9 @@
     "IPCamUID": {
       "type": "uid",
       "required": true
+    },
+    "Domain": {
+      "type": "string"
     }
   }
 }

@@ -10,23 +10,27 @@
     "timestamps": true
   },
   "attributes": {
-    "DateTime": {
+    "TriggerTimestamp": {
       "type": "datetime",
       "required": true
     },
     "Reason": {
-      "type": "string",
-      "default": "UNREPORTED"
+      "type": "string"
     },
     "fence_segment": {
       "model": "fence-segment"
     },
-    "sensor_model": {
+    "Type": {
       "model": "sensor-model"
     },
-    "AlertUID": {
-      "type": "uid",
-      "required": true
+    "attachment": {
+      "model": "file",
+      "via": "related",
+      "plugin": "upload",
+      "required": false
+    },
+    "Details": {
+      "type": "json"
     }
   }
 }
