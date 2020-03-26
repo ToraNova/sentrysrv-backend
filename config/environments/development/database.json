@@ -5,7 +5,8 @@
       "connector": "bookshelf",
       "settings": {
         "client": "sqlite",
-        "filename": ".tmp/data.db"
+        "filename": ".tmp/data.db",
+	"timezone": "utc+8"
       },
       "options": {
         "useNullAsDefault": true

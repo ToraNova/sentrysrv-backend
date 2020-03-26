@@ -10,11 +10,7 @@
     "timestamps": true
   },
   "attributes": {
-    "Begin": {
-      "type": "json",
-      "required": true
-    },
-    "End": {
+    "Data": {
       "type": "json",
       "required": true
     },

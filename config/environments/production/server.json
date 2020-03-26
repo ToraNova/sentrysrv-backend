@@ -1,5 +1,5 @@
 {
-  "host": "localhost",
+  "host": "${process.env.APP_HOST || '0.0.0.0'}",
   "port": "${process.env.PORT || 1337}",
   "production": true,
   "proxy": {
@@ -9,6 +9,9 @@
     "enabled": false
   },
   "admin": {
-    "autoOpen": false
+    "autoOpen": false,
+    "build":{
+	    "host": "http://myquarry.xyz:1337/admin"
+    }
   }
 }
