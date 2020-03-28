@@ -10,26 +10,32 @@
     "timestamps": true
   },
   "attributes": {
-    "TriggerTimestamp": {
-      "type": "datetime",
-      "required": true
-    },
     "Reason": {
       "type": "string"
     },
-    "fence_segment": {
-      "model": "fence-segment"
+    "OriginBranch": {
+      "required": true,
+      "type": "integer",
+      "min": 1
     },
-    "Type": {
-      "model": "sensor-model"
-    },
-    "attachment": {
-      "model": "file",
+    "Attachment": {
+      "collection": "file",
       "via": "related",
       "plugin": "upload",
       "required": false
     },
     "Details": {
+      "type": "json"
+    },
+    "fence_segment": {
+      "model": "fence-segment",
+      "via": "alert"
+    },
+    "alert_model": {
+      "model": "alert-model",
+      "via": "alerts"
+    },
+    "Errors": {
       "type": "json"
     }
   }

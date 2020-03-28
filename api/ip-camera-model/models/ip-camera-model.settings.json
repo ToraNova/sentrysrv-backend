@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "connection": "default",
+  "collectionName": "ip_camera_models",
+  "info": {
+    "name": "IPCameraModel"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "ModelName": {
+      "type": "string"
+    },
+    "SnapPath": {
+      "type": "string",
+      "unique": false,
+      "required": true
+    },
+    "GlobalUsername": {
+      "type": "string"
+    },
+    "GlobalPassword": {
+      "type": "password",
+      "private": true
+    },
+    "ip_cameras": {
+      "via": "ip_camera_model",
+      "collection": "ip-camera"
+    }
+  }
+}

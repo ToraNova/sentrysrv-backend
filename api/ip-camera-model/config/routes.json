@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/ip-camera-models",
+      "handler": "ip-camera-model.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/ip-camera-models/count",
+      "handler": "ip-camera-model.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/ip-camera-models/:id",
+      "handler": "ip-camera-model.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/ip-camera-models",
+      "handler": "ip-camera-model.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/ip-camera-models/:id",
+      "handler": "ip-camera-model.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/ip-camera-models/:id",
+      "handler": "ip-camera-model.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

@@ -2,16 +2,18 @@
   "name": "sentrysrv",
   "private": true,
   "version": "0.1.0",
-  "description": "A Strapi application",
+  "description": "Sentry server backend application using Strapi",
   "scripts": {
-    "develop": "strapi develop",
-    "start": "strapi start",
+    "develop": "env-cmd -f ./.env strapi develop",
+    "start": "env-cmd -f ./.env strapi start",
     "build": "strapi build",
     "strapi": "strapi"
   },
   "devDependencies": {},
   "dependencies": {
+    "env-cmd": "^10.1.0",
     "knex": "<0.20.0",
+    "mqtt": "^3.0.0",
     "sqlite3": "latest",
     "strapi": "3.0.0-beta.19.3",
     "strapi-admin": "3.0.0-beta.19.3",
@@ -24,7 +26,7 @@
     "strapi-utils": "3.0.0-beta.19.3"
   },
   "author": {
-    "name": "A Strapi developer"
+    "name": "cjason"
   },
   "strapi": {
     "uuid": "fc7f8b03-c9bd-4f11-a586-c3a89f4a9bba"

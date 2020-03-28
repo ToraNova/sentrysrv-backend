@@ -1,0 +1,45 @@
+{
+  "kind": "collectionType",
+  "connection": "default",
+  "collectionName": "ip_cameras",
+  "info": {
+    "name": "IPCamera"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "CameraName": {
+      "type": "string"
+    },
+    "Domain": {
+      "type": "string",
+      "required": true,
+      "unique": false
+    },
+    "Username": {
+      "type": "string"
+    },
+    "Password": {
+      "type": "password",
+      "private": true
+    },
+    "ip_camera_model": {
+      "model": "ip-camera-model",
+      "via": "ip_cameras"
+    },
+    "fence_segment": {
+      "model": "fence-segment",
+      "via": "ip_cameras"
+    },
+    "UseDefaultLogin": {
+      "type": "boolean",
+      "default": true,
+      "required": false
+    },
+    "IPCamUID": {
+      "type": "uid"
+    }
+  }
+}

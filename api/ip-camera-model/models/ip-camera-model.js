@@ -1,13 +1,13 @@
 'use strict';
 
 /**
- * Lifecycle callbacks for the `fence-segment` model.
+ * Lifecycle callbacks for the `ip-camera-model` model.
  */
 
 module.exports = {
   // Before saving a value.
   // Fired before an `insert` or `update` query.
-  //beforeSave: async (model, attrs, options) => {},
+  // beforeSave: async (model, attrs, options) => {},
 
   // After saving a value.
   // Fired after an `insert` or `update` query.

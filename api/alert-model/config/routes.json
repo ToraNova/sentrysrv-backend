@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/alert-models",
+      "handler": "alert-model.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/alert-models/count",
+      "handler": "alert-model.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/alert-models/:id",
+      "handler": "alert-model.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/alert-models",
+      "handler": "alert-model.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/alert-models/:id",
+      "handler": "alert-model.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/alert-models/:id",
+      "handler": "alert-model.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

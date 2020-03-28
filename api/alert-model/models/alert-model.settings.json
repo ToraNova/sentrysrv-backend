@@ -1,22 +1,22 @@
 {
   "kind": "collectionType",
   "connection": "default",
-  "collectionName": "draw_lines",
+  "collectionName": "alert_models",
   "info": {
-    "name": "DrawLine"
+    "name": "AlertModel"
   },
   "options": {
     "increments": true,
     "timestamps": true
   },
   "attributes": {
-    "Data": {
-      "type": "json",
+    "Element": {
+      "type": "string",
       "required": true
     },
-    "fence_segment": {
-      "via": "draw_lines",
-      "model": "fence-segment"
+    "alerts": {
+      "via": "alert_model",
+      "collection": "alert"
     }
   }
 }
