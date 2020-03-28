@@ -13,10 +13,6 @@
     "Data": {
       "type": "json",
       "required": true
-    },
-    "fence_segment": {
-      "via": "draw_lines",
-      "model": "fence-segment"
     }
   }
 }

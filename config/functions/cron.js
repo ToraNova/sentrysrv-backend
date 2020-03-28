@@ -11,11 +11,11 @@
  */
 
 module.exports = {
-  /**
-   * Simple example.
-   * Every monday at 1am.
-   */
-  // '0 1 * * 1': () => {
-  //
-  // }
+	// ping all hosts every 5 minutes
+	//'* */5 * * * *': () => {
+
+	'*/5 * * * * *': function () {
+		strapi.log.info('test');
+		console.log(Object.keys( strapi.plugin ))
+	}
 };

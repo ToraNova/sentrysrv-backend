@@ -29,6 +29,7 @@ const fs = require('fs')
 const path = require('path')
 const mqtt = require('mqtt')
 const ssmqtt_logic = require('./logic.js')
+const schedule = require("node-schedule");
 
 var subscription = ['ping/server','alert/+','alert','reply/+']
 
@@ -77,5 +78,20 @@ module.exports = strapi => { return {
 		client.on('message', function(topic, message) {
 			ssmqtt_logic( topic, message, strapi )
 		})
+
+		var rule = new schedule.RecurrenceRule()
+		//rule.minute = 40
+		rule.second = 10
+		const pingd = schedule.scheduleJob(rule, function(){
+			strapi.log.info('SSMQTT Ping Daemon execution')
+			//set every host's status to down
+			strapi.models['fence-host'].fetchAll().then( async function(hosts){
+				for await (const host of hosts) {
+					host.set('RepliedPing',false).save()
+				}
+				client.publish('ping/all', 'ping')
+			})
+		})
+
 	},
 }}

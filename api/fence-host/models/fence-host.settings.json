@@ -15,8 +15,8 @@
       "unique": false
     },
     "fence_segments": {
-      "via": "fence_host",
-      "collection": "fence-segment"
+      "collection": "fence-segment",
+      "via": "fence_host"
     },
     "HostUID": {
       "type": "uid",
@@ -26,6 +26,9 @@
     "LastHeard": {
       "type": "datetime",
       "required": false
+    },
+    "RepliedPing": {
+      "type": "boolean"
     }
   }
 }
