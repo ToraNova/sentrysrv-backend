@@ -1,0 +1,12 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/sentry/alerts/poll",
+      "handler": "sentry.alertpoll",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}
