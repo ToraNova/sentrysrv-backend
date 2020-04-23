@@ -13,6 +13,9 @@
     "Data": {
       "type": "json",
       "required": true
+    },
+    "fence_segment": {
+      "model": "fence-segment"
     }
   }
 }
