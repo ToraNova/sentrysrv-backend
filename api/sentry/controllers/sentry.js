@@ -10,7 +10,8 @@ module.exports = {
 	alertpoll: async (ctx) => {
 		const nalist = await strapi.models.alert.where({
 			Reason: null
-		}).fetchAll({})
+		}).fetchAll({
+		})
 		ctx.send(nalist)
 	},
 };
