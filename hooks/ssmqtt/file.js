@@ -1,6 +1,7 @@
 // Hackish way to create file(s) from a 'download' instead of a file upload
 // made for strapi sentrysrv-backend
 // 28Mar2020
+// Update 06May2020 due to changes in API by the buffoons who maintain the package
 // author: ToraNova
 // mailto: chia_jason96@live.com
 //
@@ -25,6 +26,7 @@ const fs = require('fs');
 module.exports = { async save( filemd, refmd, response, strapi){
 
 	const uplug = strapi.plugins.upload.services.upload
+	//const confg = strapi.plugins.upload.config
 	//data is on response.data
 	//console.log(Object.keys( response ) )
 	//console.log(Object.keys( response.request ) )
@@ -36,7 +38,16 @@ module.exports = { async save( filemd, refmd, response, strapi){
 	return new Promise( (resolve, reject) =>{
 		writer.on('finish', async () => {
 			filemd['size'] = writer.bytesWritten
-			const config = await uplug.getConfig()
+			const enhancedFile = await uplug.enhanceFile(
+				filemd,
+				{},
+				refmd
+			)
+			uploadedFile = await uplug.uploadFileAndPersist(enhancedFile)
+
+			/*
+			 * Stupid idiots changed the API
+			const config = await.uplug.getConfig()
 			const buffers = await uplug.bufferize(filemd)
 			const enhancedFiles = buffers.map(file => {
 				if (file.size > config.sizeLimit) {
@@ -64,10 +75,11 @@ module.exports = { async save( filemd, refmd, response, strapi){
 				//if (path) { Object.assign(file, {path, }); }
 				return file;
 			});
+			const uploadedFile = await uplug.upload(enhancedFiles, config);
+			*/
 
-			const uploadedFiles = await uplug.upload(enhancedFiles, config);
-			//return uploadedFiles
-			resolve(uploadedFiles)
+			//return uploadedFile
+			resolve(uploadedFile)
 		})
 
 		writer.on('error', (error) =>{

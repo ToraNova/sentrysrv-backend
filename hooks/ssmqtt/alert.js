@@ -93,6 +93,7 @@ strapi.log.debug(`CAM ${camuser}:${campass}@${cam.Domain}${cam.ip_camera_model.S
 			'Errors':error
 		}).save()
 	})
+
 }).catch( error => {
 	//save error
 	strapi.log.error(`CAM AX ${error.message}`)

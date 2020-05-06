@@ -5,6 +5,7 @@
 
 module.exports = async (message, strapi) => {
 	try{
+		//return true //temporarily disable lpass
 		const hosts = await strapi.models['fence-host'].forge({id: message.id})
 			.fetch({withRelated: ['fence_segments'],require:true})
 
