@@ -35,9 +35,9 @@
       "collection": "ip-camera",
       "via": "fence_segment"
     },
-    "alert": {
-      "model": "alert",
-      "via": "fence_segment"
+    "alerts": {
+      "via": "fence_segment",
+      "collection": "alert"
     }
   }
 }
