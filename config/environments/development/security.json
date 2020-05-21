@@ -21,7 +21,8 @@
     "mode": "block"
   },
   "cors": {
-    "enabled": true
+    "enabled": true,
+    "origin": ["http://localhost:4000","http://localhost:1337"]
   },
   "ip": {
     "enabled": false,

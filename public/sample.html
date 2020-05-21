@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+	<head>
+	<meta charset="utf-8" />
+	<title>Sample SocketIO Test</title>
+	</head>
+
+	<body>
+	<!-- add socket.io script -->
+	<script src="/socket.io.min.js"></script>
+	<script>
+		// connect user throught socket
+		const socket = io();
+		// listen for event name 'hello' & log it
+		socket.on('bhello', (res) => console.log(res));
+	</script>
+	</body>
+</html>

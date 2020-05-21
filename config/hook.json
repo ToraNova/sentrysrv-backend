@@ -13,7 +13,7 @@
 		"login": true,
 		"username": "strapi-ssmqtt",
 		"password": "test123",
-		"broker": "localhost",
+		"broker": "192.168.40.110",
 		"port": "1883"
 	}
 }
