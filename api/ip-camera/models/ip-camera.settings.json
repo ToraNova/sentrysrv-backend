@@ -26,8 +26,8 @@
       "private": true
     },
     "ip_camera_model": {
-      "model": "ip-camera-model",
-      "via": "ip_cameras"
+      "via": "ip_cameras",
+      "model": "ip-camera-model"
     },
     "fence_segment": {
       "via": "ip_cameras",

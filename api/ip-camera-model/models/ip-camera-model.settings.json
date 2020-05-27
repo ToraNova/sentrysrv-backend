@@ -26,8 +26,12 @@
       "private": true
     },
     "ip_cameras": {
-      "via": "ip_camera_model",
-      "collection": "ip-camera"
+      "collection": "ip-camera",
+      "via": "ip_camera_model"
+    },
+    "StreamPath": {
+      "type": "string",
+      "required": true
     }
   }
 }

@@ -56,14 +56,14 @@ module.exports = strapi => { return {
 		}
 
 		//connect
-		var client = mqtt.connect(`mqtt://${broker}:${port}`,conn_opt)
+		strapi.ssmqtt = mqtt.connect(`mqtt://${broker}:${port}`,conn_opt)
 
 		//callbacks
-		client.on('connect', function (connack) {
+		strapi.ssmqtt.on('connect', function (connack) {
 			strapi.log.info(`SSMQTT Connected to broker connack.rc:${connack.returnCode}`)
 			//subscribe to subscriptions
 			subscription.forEach(element => {
-				client.subscribe(element, function (err) {
+				strapi.ssmqtt.subscribe(element, function (err) {
 					if (err) {
 						strapi.log.error(`SSMQTT Subscription error ${error}`)
 					}
@@ -71,11 +71,11 @@ module.exports = strapi => { return {
 			})
 		})
 
-		client.on('error',function(error) {
+		strapi.ssmqtt.on('error',function(error) {
 			strapi.log.info(`SSMQTT ${error}`)
 		})
 
-		client.on('message', function(topic, message) {
+		strapi.ssmqtt.on('message', function(topic, message) {
 			ssmqtt_logic( topic, message, strapi )
 		})
 
@@ -89,7 +89,7 @@ module.exports = strapi => { return {
 				for await (const host of hosts) {
 					host.set('RepliedPing',false).save()
 				}
-				client.publish('ping/all', 'ping')
+				strapi.ssmqtt.publish('ping/all', 'ping')
 			})
 		})
 
