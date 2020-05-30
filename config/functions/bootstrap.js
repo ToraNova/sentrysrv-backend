@@ -65,11 +65,12 @@ module.exports = async () => {
 				}else{
 					cams.serialize().forEach( (e, idx) => {
 						//craft a MQTT packet
+						var nopro = e.Domain.split(/:(.+)/)[1]
 						var livecom = {
 							fsegid: msg.fseg,
 							video: msg.vnum,
 							mode: msg.command,
-							url:`${e.Domain}${e.ip_camera_model.StreamPath}`,
+							url:`rtsp:${nopro}${e.ip_camera_model.StreamPath}`,
 						}
 						if(e.UseDefaultLogin){
 							livecom.user = e.ip_camera_model.GlobalUsername
