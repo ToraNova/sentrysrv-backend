@@ -31,7 +31,7 @@ const mqtt = require('mqtt')
 const ssmqtt_logic = require('./logic.js')
 const schedule = require("node-schedule");
 
-var subscription = ['ping/server','alert/+','alert','reply/+']
+var subscription = ['ping/server','alert/+','alert','reply/+','reply']
 
 module.exports = strapi => { return {
 
