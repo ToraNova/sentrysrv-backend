@@ -1,3 +1,8 @@
+#
+# configuration ignores
+config/hook.json
+
+
 ############################
 # OS X
 ############################
