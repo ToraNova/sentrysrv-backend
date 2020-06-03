@@ -57,6 +57,17 @@ module.exports = async () => {
 		socket.on('focus/live', (msg) => {
 			msg = JSON.parse(msg)
 
+			if( msg.command == 'stop' ){
+				var livecom = {
+					fsegid: null,
+					video: msg.vnum,
+					mode: msg.command,
+					url:null,
+				}
+				strapi.ssmqtt.publish('camlive', JSON.stringify(livecom))
+				return
+			}
+
 			strapi.models['ip-camera'].query({
 				where: {fence_segment: msg.fseg}
 			}).fetchAll().then( cams => {
