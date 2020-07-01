@@ -46,11 +46,13 @@ module.exports = async () => {
 		socket.on('focus/init', (msg) => {
 			if(msg){
 				msg = JSON.parse(msg)
+			}else{
+				msg = {count: 10}
 			}
 
 			strapi.models['alert'].query( qb => {
 				qb.where('Reason',null)
-				qb.limit( msg.count || 4 )
+				qb.limit( msg.count || 10 )
 			}).fetchAll({
 				withRelated: ['fence_segment','fence_segment.fence_host',
 					'Attachment','fence_host','alert_model']
