@@ -33,8 +33,9 @@ module.exports = async () => {
 				socket.emit('map/line/data',JSON.stringify(lines))
 			})
 
-			strapi.models['alert'].where({
-				Reason: null
+			strapi.models['alert'].query( qb =>{
+				qb.where('Reason',null)
+				qb.limit(100)
 			}).fetchAll().then( nalerts => {
 				strapi.log.debug('map/alert/data sent')
 				socket.emit('map/alert/data',JSON.stringify(nalerts))
@@ -42,7 +43,23 @@ module.exports = async () => {
 		})
 
 		//listen for map initial data request
-		socket.on('focus/init', () => {
+		socket.on('focus/init', (msg) => {
+			if(msg){
+				msg = JSON.parse(msg)
+			}
+
+			strapi.models['alert'].query( qb => {
+				qb.where('Reason',null)
+				qb.limit( msg.count || 4 )
+			}).fetchAll({
+				withRelated: ['fence_segment','fence_segment.fence_host',
+					'Attachment','fence_host','alert_model']
+			}).then( nalerts => {
+				strapi.log.debug('focus/alert/data sent')
+				socket.emit('focus/alert/data',JSON.stringify(nalerts))
+			})
+
+			/*
 			strapi.models['alert'].where({
 				Reason: null
 			}).fetchAll({
@@ -52,6 +69,7 @@ module.exports = async () => {
 				strapi.log.debug('focus/alert/data sent')
 				socket.emit('focus/alert/data',JSON.stringify(nalerts))
 			})
+			*/
 		})
 
 		socket.on('focus/live', (msg) => {
@@ -68,8 +86,8 @@ module.exports = async () => {
 				return
 			}
 
-			strapi.models['ip-camera'].query({
-				where: {fence_segment: msg.fseg}
+			strapi.models['ip-camera'].where({
+				fence_segment: msg.fseg || 0
 			}).fetchAll().then( cams => {
 				if(cams.length <= 0){
 					//no cameras

@@ -26,12 +26,13 @@
       "private": true
     },
     "ip_camera_model": {
-      "via": "ip_cameras",
-      "model": "ip-camera-model"
+      "model": "ip-camera-model",
+      "via": "ip_cameras"
     },
-    "fence_segment": {
+    "fence_segments": {
+      "collection": "fence-segment",
       "via": "ip_cameras",
-      "model": "fence-segment"
+      "dominant": true
     },
     "UseDefaultLogin": {
       "type": "boolean",
