@@ -28,12 +28,10 @@
       "type": "json"
     },
     "fence_segment": {
-      "model": "fence-segment",
-      "via": "alerts"
+      "model": "fence-segment"
     },
     "alert_model": {
-      "model": "alert-model",
-      "via": "alerts"
+      "model": "alert-model"
     },
     "Errors": {
       "type": "json"

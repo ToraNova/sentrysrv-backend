@@ -29,10 +29,9 @@
       "model": "ip-camera-model",
       "via": "ip_cameras"
     },
-    "fence_segments": {
-      "collection": "fence-segment",
-      "via": "ip_cameras",
-      "dominant": true
+    "fence_segment": {
+      "model": "fence-segment",
+      "via": "ip_cameras"
     },
     "UseDefaultLogin": {
       "type": "boolean",

@@ -31,12 +31,8 @@
       "min": 1,
       "default": 1
     },
-    "alerts": {
-      "via": "fence_segment",
-      "collection": "alert"
-    },
     "ip_cameras": {
-      "via": "fence_segments",
+      "via": "fence_segment",
       "collection": "ip-camera"
     }
   }
