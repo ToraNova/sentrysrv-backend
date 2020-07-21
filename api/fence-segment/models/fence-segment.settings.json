@@ -32,12 +32,8 @@
       "default": 1
     },
     "ip_cameras": {
-      "collection": "ip-camera",
-      "via": "fence_segment"
-    },
-    "alerts": {
       "via": "fence_segment",
-      "collection": "alert"
+      "collection": "ip-camera"
     }
   }
 }

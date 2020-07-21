@@ -13,10 +13,6 @@
     "Element": {
       "type": "string",
       "required": true
-    },
-    "alerts": {
-      "via": "alert_model",
-      "collection": "alert"
     }
   }
 }
