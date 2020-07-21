@@ -43,7 +43,20 @@ module.exports = {
 
   // After updating a value.
   // Fired after an `update` query.
-  // afterUpdate: async (model, attrs, options) => {},
+afterUpdate: async (model, attrs, options) => {
+
+	strapi.models['fence-host'].where({
+		id: model.attributes.id
+	}).fetchAll({
+	}).then( nhost => {
+		//console.log(nhost.models[0].attributes)
+		if(nhost.models[0].attributes.RepliedPing){
+			strapi.io.emit('down/alert/update',JSON.stringify(nhost))
+		}else{
+			strapi.io.emit('down/alert/new',JSON.stringify(nhost))
+		}
+	})
+},
 
   // Before destroying a value.
   // Fired before a `delete` query.

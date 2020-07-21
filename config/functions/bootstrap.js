@@ -41,13 +41,14 @@ module.exports = async () => {
 			})
 		})
 
-		//listen for map initial data request
+		//listen for focus initial data request
 		socket.on('focus/init', () => {
 			strapi.models['alert'].where({
 				Reason: null
 			}).fetchAll({
-				withRelated: ['fence_segment','fence_segment.fence_host',
-					'Attachment','fence_host','alert_model']
+				withRelated:
+				['fence_segment','fence_segment.fence_host',
+				'Attachment','fence_host','alert_model']
 			}).then( nalerts => {
 				strapi.log.debug('focus/alert/data sent')
 				socket.emit('focus/alert/data',JSON.stringify(nalerts))
@@ -100,6 +101,24 @@ module.exports = async () => {
 		socket.on('focus/alert/highlight', (msg) => {
 			socket.broadcast.emit('map/alert/highlight', msg)
 			strapi.log.debug('sync focus-map',msg)
+		})
+
+		//list for down initial data request
+		socket.on('down/init', () => {
+			strapi.models['draw-line'].query({
+			}).fetchAll().then( lines => {
+				// sends the line data
+				strapi.log.debug('down/line/data sent')
+				socket.emit('down/line/data',JSON.stringify(lines))
+			})
+
+			strapi.models['fence-host'].where({
+				RepliedPing: false
+			}).fetchAll({
+			}).then( nhosts => {
+				strapi.log.debug('down/alert/data sent')
+				socket.emit('down/alert/data',JSON.stringify(nhosts))
+			})
 		})
 
 
