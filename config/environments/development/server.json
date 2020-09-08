@@ -8,6 +8,9 @@
     "enabled": false
   },
   "admin": {
-    "autoOpen": false
+    "autoOpen": false,
+    "build":{
+	    "host": "http://${process.env.APP_HOST}:1337/admin"
+    }
   }
 }

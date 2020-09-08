@@ -11,7 +11,7 @@
   "admin": {
     "autoOpen": false,
     "build":{
-	    "host": "http://myquarry.xyz:1337/admin"
+	    "host": "http://${process.env.APP_HOST}:1337/admin"
     }
   }
 }
