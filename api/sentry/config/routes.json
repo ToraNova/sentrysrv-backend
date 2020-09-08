@@ -1,7 +1,7 @@
 {
   "routes": [
     {
-      "method": "GET",
+      "method": "POST",
       "path": "/sentry/alerts/poll",
       "handler": "sentry.alertpoll",
       "config": {

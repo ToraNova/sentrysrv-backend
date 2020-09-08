@@ -2,7 +2,8 @@
 
 const axios = require('axios').default
 const fhandle = require('./file.js')
-const lpass = require('./lpass.js')
+const lpass = require('./lpass.js') //obsolete, using model lifecycle callbacks
+// see api/alert/models/alert.js
 
 module.exports = async (topic, message, strapi) => {
 	//strapi.log.info(`Alert handler`)
@@ -20,11 +21,11 @@ module.exports = async (topic, message, strapi) => {
 		return
 	}
 
-	const lp = await lpass(message, strapi)
-	if( !lp){
-		strapi.log.debug(`SSMQTT Alert insertion blocked by lpass`)
-		return
-	}
+	//const lp = await lpass(message, strapi)
+	//if(!lp){
+	//	strapi.log.debug(`SSMQTT Alert insertion blocked by lpass`)
+	//	return
+	//}
 	//lp = true
 
 	strapi.models['fence-host'].forge({

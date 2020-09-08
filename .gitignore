@@ -115,3 +115,5 @@ coverage
 exports
 .cache
 build
+
+.env

@@ -7,10 +7,16 @@
 module.exports = {
   // Before saving a value.
   // Fired before an `insert` or `update` query.
-  beforeSave: async (model, attrs, options) => {
+	beforeSave: async (model, attrs, options) => {
 	  //console.log(model)
 	  //TODO: introduce AI or a global low-pass filter here
-  },
+		if(model.fence_segment == undefined && options.method == 'insert'){
+			const others = await model.where({"fence_segment": attrs.fence_segment,"OriginBranch":attrs.OriginBranch,"reason":null}).fetchAll()
+			if(others.length > 0){
+				throw new Error('Insertion disabled by lpass.')
+			}
+		}
+	},
 
 // After saving a value.
 // Fired after an `insert` or `update` query.
