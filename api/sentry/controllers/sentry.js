@@ -11,7 +11,7 @@ module.exports = {
 		const par = ctx.request.url.split('?')[1].split('&')
 		const fseg = par[0]
 		const atyp = par[1]
-		console.log(fseg,atyp)
+		//console.log(fseg,atyp)
 		const nalist = await strapi.models.alert.where({
 			Reason: null,
 			fence_segment: +fseg,
