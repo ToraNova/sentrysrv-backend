@@ -15,8 +15,8 @@
       "unique": false
     },
     "fence_segments": {
-      "collection": "fence-segment",
-      "via": "fence_host"
+      "via": "fence_host",
+      "collection": "fence-segment"
     },
     "HostUID": {
       "type": "uid",
@@ -29,6 +29,9 @@
     },
     "RepliedPing": {
       "type": "boolean"
+    },
+    "HostInfo": {
+      "type": "string"
     }
   }
 }

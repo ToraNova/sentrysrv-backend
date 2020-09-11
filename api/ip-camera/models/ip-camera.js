@@ -7,7 +7,12 @@
 module.exports = {
   // Before saving a value.
   // Fired before an `insert` or `update` query.
-  // beforeSave: async (model, attrs, options) => {},
+	//beforeSave: async (model, attrs, options) => {
+	//	console.log(options);
+	//	console.log(attrs);
+	//	//const ec = await model.where({id: attrs});
+
+	//},
 
   // After saving a value.
   // Fired after an `insert` or `update` query.

@@ -37,7 +37,9 @@ module.exports = async (topic, message, strapi) => {
 	}).then( host => {
 		if( host == null ) {}
 		else for(var segment of host.relations['fence_segments'].models) {
-			if( segment.attributes.Branch == +message.branch ){
+			if( segment.attributes.Branch == +message.branch
+				&& +message.enum >= segment.attributes.StartElement
+				&& +message.enum <= segment.attributes.EndElement){
 				strapi.models['alert'].forge({
 					"Reason":null,
 					"OriginBranch": +message.branch,

@@ -40,6 +40,9 @@
     },
     "IPCamUID": {
       "type": "uid"
+    },
+    "CameraInfo": {
+      "type": "string"
     }
   }
 }

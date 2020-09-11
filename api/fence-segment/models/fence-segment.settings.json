@@ -15,8 +15,8 @@
       "unique": false
     },
     "fence_host": {
-      "via": "fence_segments",
-      "model": "fence-host"
+      "model": "fence-host",
+      "via": "fence_segments"
     },
     "SegmentUID": {
       "type": "uid",
@@ -34,6 +34,17 @@
     "ip_cameras": {
       "via": "fence_segment",
       "collection": "ip-camera"
+    },
+    "SegmentInfo": {
+      "type": "string"
+    },
+    "StartElement": {
+      "type": "integer",
+      "required": true
+    },
+    "EndElement": {
+      "type": "integer",
+      "required": true
     }
   }
 }
