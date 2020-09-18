@@ -15,8 +15,7 @@
     },
     "OriginBranch": {
       "required": true,
-      "type": "integer",
-      "min": 1
+      "type": "integer"
     },
     "Attachment": {
       "collection": "file",
