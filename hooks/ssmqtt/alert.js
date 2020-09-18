@@ -110,7 +110,6 @@ strapi.log.debug(`CAM ${camuser}:${campass}@${cam.Domain}${cam.ip_camera_model.S
 						})
 					})
 				})
-				return
 			}
 		}
 	})
