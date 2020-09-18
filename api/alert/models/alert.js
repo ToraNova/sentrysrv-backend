@@ -10,7 +10,7 @@ module.exports = {
 	beforeSave: async (model, attrs, options) => {
 		//console.log(model)
 		//TODO: introduce AI or a global low-pass filter here
-		if(options.method == 'insert'){
+		if(attrs.OriginBranch !== 0 && options.method == 'insert'){
 			const others = await model.where({"fence_segment": attrs.fence_segment,"OriginBranch":attrs.OriginBranch,"reason":null}).fetchAll()
 			if(others.length > 0){
 				throw new Error('Insertion disabled by lpass.')
