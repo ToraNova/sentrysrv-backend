@@ -89,13 +89,19 @@ module.exports = async () => {
 				return
 			}
 
-			strapi.models['ip-camera'].where({
-				fence_segment: msg.fseg || 0
-			}).fetchAll().then( cams => {
-				if(cams.length <= 0){
-					//no cameras
+			strapi.query('fence-segment')
+			.model.query(qb => {
+				qb.where('id', msg.fseg || 0);
+			}).fetch({require:true}).then( (sr) => {
+				const s = sr.toJSON();
+				if(s.ip_camera === null){
+					// no cameras
 				}else{
-					cams.serialize().forEach( (e, idx) => {
+					strapi.query('ip-camera')
+					.model.query(qb => {
+						qb.where('id', s.ip_camera.id);
+					}).fetch().then( (cr) => {
+						const e = cr.toJSON();
 						//craft a MQTT packet
 						var nopro = e.Domain.split(/:(.+)/)[1]
 						var livecom = {
@@ -112,9 +118,11 @@ module.exports = async () => {
 							livecom.pass = e.Password
 						}
 						strapi.ssmqtt.publish('camlive', JSON.stringify(livecom))
-					})
+					});
 				}
-			})
+			}).catch( err => {
+				strapi.log.error(`focus/live ${err.message}`)
+			});
 		})
 
 		//forward this message to map/alert/highlight

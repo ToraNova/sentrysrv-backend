@@ -28,12 +28,7 @@
     "Branch": {
       "type": "integer",
       "required": true,
-      "min": 1,
       "default": 1
-    },
-    "ip_cameras": {
-      "via": "fence_segment",
-      "collection": "ip-camera"
     },
     "SegmentInfo": {
       "type": "string"
@@ -45,6 +40,10 @@
     "EndElement": {
       "type": "integer",
       "required": true
+    },
+    "ip_camera": {
+      "model": "ip-camera",
+      "via": "fence_segments"
     }
   }
 }

@@ -28,18 +28,14 @@ module.exports = async (topic, message, strapi) => {
 	//}
 	//lp = true
 
-	strapi.models['fence-host'].forge({
-		id: message.id
-	}).fetch({
-		//withRelated: ['fence_segments']
-		withRelated: ['fence_segments'],
-		require:true
-	}).then( host => {
-		if( host == null ) {}
-		else for(var segment of host.relations['fence_segments'].models) {
-			if( segment.attributes.Branch == +message.branch
-				&& +message.enum >= segment.attributes.StartElement
-				&& +message.enum <= segment.attributes.EndElement){
+	try{ const res = await strapi.query('fence-host')
+		.model.query(qb => {
+			qb.where('id', message.id);
+		}).fetch({require:true});
+		for( var segment of res.toJSON().fence_segments){
+			if( segment.Branch == +message.branch
+			&& +message.enum >= segment.StartElement
+			&& +message.enum <= segment.EndElement){
 				strapi.models['alert'].forge({
 					"Reason":null,
 					"OriginBranch": +message.branch,
@@ -48,14 +44,14 @@ module.exports = async (topic, message, strapi) => {
 					"Details": message.info
 				}).save().then( function(a) {
 					strapi.log.debug(`SSMQTT Alert inserted UUID:${a.get('id')}`)
-					strapi.models['ip-camera'].query({
-						where: {fence_segment: +segment.id}
-					}).fetchAll().then( cams => {
-						//do someting with cams here
-						cams.serialize().forEach( (cam,idx) => {
-
+					strapi.query('ip-camera')
+					.model.query(qb => {
+						qb.where('id', segment.ip_camera);
+					}).fetch().then( (res) => {
+						if(res === null){}
+						else{
+							const cam = res.toJSON();
 //------------------------------------------------------------------------------------------------------
-
 //do something with individual cam here
 var camuser; var campass; var opt
 
@@ -104,13 +100,11 @@ strapi.log.debug(`CAM ${camuser}:${campass}@${cam.Domain}${cam.ip_camera_model.S
 		'Errors':error
 	}).save()
 })
-
 //------------------------------------------------------------------------------------------------------
-
-						})
-					})
-				})
+						}
+					});
+				});
 			}
 		}
-	})
+	}catch(err){ strapi.log.error(`SSMQTT fence-host with id ${message.id} does not exist!`);}
 }
