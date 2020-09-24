@@ -23,7 +23,8 @@
       "required": true
     },
     "draw_lines": {
-      "collection": "draw-line"
+      "collection": "draw-line",
+      "via": "fence_segment"
     },
     "Branch": {
       "type": "integer",
