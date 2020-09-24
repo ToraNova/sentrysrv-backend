@@ -5,4 +5,14 @@
  * to customize this controller
  */
 
-module.exports = {};
+module.exports = {
+
+
+	find: async (ctx) => {
+		var ndlist = await strapi.models['draw-line'].query({
+		}).fetchAll();
+		ndlist = ndlist.toJSON();
+		ctx.send(ndlist);
+	},
+
+};
