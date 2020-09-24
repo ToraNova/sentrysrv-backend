@@ -81,7 +81,7 @@ module.exports = strapi => { return {
 
 		var rule = new schedule.RecurrenceRule()
 		//rule.minute = 40
-		rule.second = 10
+		rule.second = 60
 		const pingd = schedule.scheduleJob(rule, function(){
 			strapi.log.info('SSMQTT Ping Daemon execution')
 			//set every host's status to down

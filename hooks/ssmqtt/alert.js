@@ -36,6 +36,8 @@ module.exports = async (topic, message, strapi) => {
 			if( segment.Branch == +message.branch
 			&& +message.enum >= segment.StartElement
 			&& +message.enum <= segment.EndElement){
+				const unfuck = segment; //for some reasons, the segment in the (then)
+				// is different from the segment here!
 				strapi.models['alert'].forge({
 					"Reason":null,
 					"OriginBranch": +message.branch,
@@ -46,7 +48,7 @@ module.exports = async (topic, message, strapi) => {
 					strapi.log.debug(`SSMQTT Alert inserted UUID:${a.get('id')}`)
 					strapi.query('ip-camera')
 					.model.query(qb => {
-						qb.where('id', segment.ip_camera);
+						qb.where('id', unfuck.ip_camera);
 					}).fetch().then( (res) => {
 						if(res === null){}
 						else{
