@@ -41,7 +41,7 @@ module.exports = async (topic, message, strapi) => {
 					"OriginBranch": +message.branch,
 					"fence_segment": +segment.id,
 					"alert_model": +message.type,
-					"Details": message.info
+					"Details": message.details
 				}).save().then( function(a) {
 					strapi.log.debug(`SSMQTT Alert inserted UUID:${a.get('id')}`)
 					strapi.query('ip-camera')
