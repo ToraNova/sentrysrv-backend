@@ -50,14 +50,29 @@ module.exports = async () => {
 				msg = {count: 10}
 			}
 
-			strapi.query('alert').find({
-				Reason_null:true,
-				_limit: msg.count || 10
-			}).then( (res) => {
-				socket.emit('focus/alert/data', JSON.stringify(res));
-			}).catch( err => {
-				strapi.log.error(`focus/init ${err.message}`)
-			});
+			strapi.models['alert'].query( qb => {
+				qb.where('Reason',null)
+				qb.limit( msg.count || 10 )
+			}).fetchAll({
+				withRelated: ['fence_segment','fence_segment.fence_host',
+					'Attachment','fence_host','alert_model']
+			}).then( nalerts => {
+				strapi.log.debug('focus/alert/data sent')
+				socket.emit('focus/alert/data',JSON.stringify(nalerts))
+			})
+
+			/*
+			strapi.models['alert'].where({
+				Reason: null
+			}).fetchAll({
+				withRelated:
+				['fence_segment','fence_segment.fence_host',
+				'Attachment','fence_host','alert_model']
+			}).then( nalerts => {
+				strapi.log.debug('focus/alert/data sent')
+				socket.emit('focus/alert/data',JSON.stringify(nalerts))
+			})
+			*/
 		})
 
 		socket.on('focus/live', (msg) => {

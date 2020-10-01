@@ -29,9 +29,8 @@ const fs = require('fs')
 const path = require('path')
 const mqtt = require('mqtt')
 const ssmqtt_logic = require('./logic.js')
-const schedule = require("node-schedule");
 
-var subscription = ['ping/server','alert/+','alert','reply/+','reply']
+var subscription = ['ping/server','alert/+','alert','reply/+','reply','nvai/init']
 
 module.exports = strapi => { return {
 
@@ -40,7 +39,9 @@ module.exports = strapi => { return {
 	},
 
 	async initialize() {
-		const { login, username, password, broker, port } = strapi.config.hook.ssmqtt
+		const { login, username, password, broker, port } = strapi.config.hook.settings.ssmqtt;
+
+		strapi.log.info(`SSMQTT Initializing.`);
 
 		var conn_opt = { clientId : 'mqtt-serverside-1',
 				 clean : true,
@@ -61,6 +62,7 @@ module.exports = strapi => { return {
 		//callbacks
 		strapi.ssmqtt.on('connect', function (connack) {
 			strapi.log.info(`SSMQTT Connected to broker connack.rc:${connack.returnCode}`)
+			strapi.ssmqtt.publish('nvai/re', '.')
 			//subscribe to subscriptions
 			subscription.forEach(element => {
 				strapi.ssmqtt.subscribe(element, function (err) {
@@ -78,20 +80,5 @@ module.exports = strapi => { return {
 		strapi.ssmqtt.on('message', function(topic, message) {
 			ssmqtt_logic( topic, message, strapi )
 		})
-
-		var rule = new schedule.RecurrenceRule()
-		//rule.minute = 40
-		rule.second = 60
-		const pingd = schedule.scheduleJob(rule, function(){
-			strapi.log.info('SSMQTT Ping Daemon execution')
-			//set every host's status to down
-			strapi.models['fence-host'].fetchAll().then( async function(hosts){
-				for await (const host of hosts) {
-					host.set('RepliedPing',false).save()
-				}
-				strapi.ssmqtt.publish('ping/all', 'ping')
-			})
-		})
-
 	},
 }}

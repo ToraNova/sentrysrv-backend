@@ -22,8 +22,9 @@
  * mosquitto_pub -h 127.0.0.1 -p 1883 -t alert -m "{\"id\":\"2\",\"branch\":\"1\",\"mag\":\"0xFF\"}"
  */
 
-const ahandle = require('./alert.js')
-const rhandle = require('./reply.js')
+const ahandle = require('./alert.js');
+const rhandle = require('./reply.js');
+const nhandle = require('./nvai.js');
 
 module.exports = (topic, message, strapi) => {
 	try{
@@ -40,10 +41,13 @@ module.exports = (topic, message, strapi) => {
 		try{
 			switch(cat){
 				case 'alert':
-					ahandle(topic, jm, strapi)
+					ahandle(topic, jm, strapi);
 					break;
 				case 'reply':
-					rhandle(topic, jm, strapi)
+					rhandle(topic, jm, strapi);
+					break;
+				case 'nvai':
+					nhandle(topic, jm, strapi);
 					break;
 				default:
 					//donothing

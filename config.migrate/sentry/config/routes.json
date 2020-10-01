@@ -1,0 +1,36 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/sentry/alerts/poll",
+      "handler": "sentry.alertpoll",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/sentry/alerts/view/byhost/:id",
+      "handler": "sentry.alertbyhost",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/sentry/alerts/view/bysegment/:id",
+      "handler": "sentry.alertbysegment",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/sentry/alerts/view/",
+      "handler": "sentry.alertview",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}
