@@ -3,7 +3,7 @@ module.exports = {
 		cors: {
 			enabled: true,
 			origin:
-			['http://localhost:1337', 'https://localhost:4000'],
+			['http://localhost:1337', 'http://localhost:4000'],
 		},
 		ip: {
 			enabled: false,
