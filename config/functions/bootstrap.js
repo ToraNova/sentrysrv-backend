@@ -79,7 +79,7 @@ module.exports = async () => {
 			if(seg.ip_camera === null){
 				//no cameras
 			}else{
-				const e = seg.ip_camera
+				const e = await strapi.query('ip-camera').findOne({ id: seg.ip_camera.id});
 				//craft a MQTT packet
 				var nopro = e.Domain.split(/:(.+)/)[1]
 				var livecom = {
