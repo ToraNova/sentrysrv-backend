@@ -73,17 +73,19 @@ strapi.log.debug(`CAM ${camuser}:${campass}@${c.Domain}${c.ip_camera_model.SnapP
 		strapi.log.debug('CAM save successful')
 	}).catch( error => {
 		strapi.log.error(`CAM FH ${error.message}`)
-		a.set({
-			'Errors':error
-		}).save()
+		const e = (({ message, stack }) => ({ message, stack }))(error);
+		strapi.query('alert').update({ id: a.id },
+			{Errors:e}
+		);
 	})
 
 }).catch( error => {
 	//save error
-	strapi.log.error(`CAM AX ${error.message}`)
-	a.set({
-		'Errors':error
-	}).save()
+	strapi.log.error(`CAM AX ${error.message}`);
+	const e = (({ message, stack }) => ({ message, stack }))(error);
+	strapi.query('alert').update({ id: a.id },
+		{Errors:e}
+	);
 })
 //------------------------------------------------------------------------------------------------
 			}catch(err){
