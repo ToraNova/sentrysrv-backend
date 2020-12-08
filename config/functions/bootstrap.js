@@ -20,6 +20,8 @@ module.exports = async () => {
 	// import socket io
 	var io = require('socket.io')(strapi.server)
 
+	delete strapi.plugins['users-permissions'].config.jwt.expiresIn; //disable login expiry
+
 	// listen for user connection
 	io.on('connection', function(socket){
 		strapi.log.debug('client connected')
