@@ -30,7 +30,7 @@ const path = require('path')
 const mqtt = require('mqtt')
 const ssmqtt_logic = require('./logic.js')
 
-var subscription = ['ping/server','alert/+','alert','reply/+','reply','nvai/init']
+var subscription = ['ping/server','alert/+','alert','reply/+','reply','nvai/init','nvai/alert']
 
 module.exports = strapi => { return {
 
