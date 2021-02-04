@@ -11,8 +11,8 @@ module.exports = {
 	lifecycles: {
 		async beforeCreate(data) {
 			const res = await strapi.query('alert').count({
-				fence_segment: data.fence_segment,
-				Reason_null: true
+				Reason_null: true,
+				fence_segment: data.fence_segment
 			});
 			if(res > 0){
 				throw new Error('Insertion disabled by lpass');
