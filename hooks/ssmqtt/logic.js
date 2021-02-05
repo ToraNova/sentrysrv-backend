@@ -28,7 +28,6 @@ const nhandle = require('./nvai.js');
 
 module.exports = (topic, message, strapi) => {
 	try{
-		strapi.log.debug(`SSMQTT received ${message} on ${topic}`)
 		var jm = JSON.parse(message)
 		//obtain the first level topic cat <-- ( */./. )
 		var cat;
@@ -41,12 +40,15 @@ module.exports = (topic, message, strapi) => {
 		try{
 			switch(cat){
 				case 'alert':
+					strapi.log.debug(`SSMQTT received ${message} on alert`)
 					ahandle(topic, jm, strapi);
 					break;
 				case 'reply':
+					//strapi.log.debug(`SSMQTT received ${message} on reply`)
 					rhandle(topic, jm, strapi);
 					break;
 				case 'nvai':
+					strapi.log.debug(`SSMQTT received ${message} on nvai`)
 					nhandle(topic, jm, strapi);
 					break;
 				default:

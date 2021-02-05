@@ -23,7 +23,7 @@ module.exports = (topic, message, strapi) => {
 			}
 			break;
 		case 'alert':
-			//TODO
+			strapi.log.debug(`SSMQTT NVAI Alert received from ${message.id}`);
 			strapi.query('alert').create({
 				"Reason":null,
 				"OriginBranch": +message.branch,
@@ -31,8 +31,9 @@ module.exports = (topic, message, strapi) => {
 				"alert_model": +message.type,
 				"Details": message.details
 			}).then( res => {
-				strapi.ssmqtt.publish('nvai/uploadreq', JSON.stringify({fseg: message.id, aid: res.id}));
 				strapi.log.debug(`SSMQTT Alert inserted UUID:${res.id}`)
+				strapi.ssmqtt.publish('nvai/uploadreq', JSON.stringify({fseg: message.id, aid: res.id}));
+				strapi.log.debug(`SSMQTT upload request on UUID:${res.id}`)
 			});
 			break;
 		default:
