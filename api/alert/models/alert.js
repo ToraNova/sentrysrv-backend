@@ -28,5 +28,10 @@ module.exports = {
 			strapi.io.emit('map/alert/update', JSON.stringify(result))
 			strapi.ssmqtt.publish('nvai/clear', JSON.stringify({fseg: result.fence_segment.id}));
 		},
+		afterDelete(result, params) {
+			for(var r of result){
+				strapi.ssmqtt.publish('nvai/clear', JSON.stringify({fseg: r.fence_segment.id}));
+			}
+		},
 	},
 };
