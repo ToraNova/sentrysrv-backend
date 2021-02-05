@@ -25,6 +25,17 @@ module.exports = async (topic, message, strapi) => {
 		&& +message.enum <= segment.EndElement){
 
 			try{
+
+				const res = await strapi.query('alert').count({
+					Reason_null: true,
+					fence_segment: segment.id
+				});
+				if(res > 0){
+					strapi.log.warn(`SSMQTT insertion with id ${message.id} disabled by lpass`);
+					return
+				}
+
+
 				//add new alert
 				const a = await strapi.query('alert').create({
 					"Reason":null,
