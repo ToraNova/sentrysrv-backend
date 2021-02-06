@@ -26,7 +26,7 @@ module.exports = (topic, message, strapi) => {
 
 			// FAST BROADCAST
 			strapi.connections.default.raw(`select max(id) from alerts;`).then( res => {
-				var nid = res[0]['max(id)'] + 5
+				var nid = res[0]['max(id)'] + 15 //ugly fix
 				strapi.io.emit('map/alert/new', JSON.stringify({fence_segment:{id:message.id},Reason:null,id:nid}))
 
 				strapi.log.debug(`SSMQTT NVAI alert received from ${message.id}`);
