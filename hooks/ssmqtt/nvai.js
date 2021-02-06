@@ -31,8 +31,6 @@ module.exports = (topic, message, strapi) => {
 
 				strapi.log.debug(`SSMQTT NVAI alert received from ${message.id}`);
 				strapi.connections.default.raw(`insert into alerts (id, OriginBranch, Details, fence_segment, alert_model) values (${nid}, '${message.branch}','${JSON.stringify(message.details)}','${message.id}','${message.type}');`).then( _res => {
-					console.log(_res);
-
 					strapi.log.debug(`SSMQTT NVAI alert inserted on segmentID:${message.id}`)
 					strapi.ssmqtt.publish('nvai/uploadreq', JSON.stringify({fseg: message.id, aid: nid}));
 					strapi.log.debug(`SSMQTT NVAI alert broadcasted alertID:${nid}`)
@@ -40,17 +38,17 @@ module.exports = (topic, message, strapi) => {
 			});
 
 
-			strapi.query('alert').create({
-				"Reason":null,
-				"OriginBranch": +message.branch,
-				"fence_segment": +message.id,
-				"alert_model": +message.type,
-				"Details": message.details
-			}).then( async res => {
-				strapi.log.debug(`SSMQTT Alert inserted UUID:${res.id}`)
-				strapi.ssmqtt.publish('nvai/uploadreq', JSON.stringify({fseg: message.id, aid: res.id}));
-				//strapi.log.debug(`SSMQTT upload request on UUID:${res.id}`)
-			});
+			//strapi.query('alert').create({
+			//	"Reason":null,
+			//	"OriginBranch": +message.branch,
+			//	"fence_segment": +message.id,
+			//	"alert_model": +message.type,
+			//	"Details": message.details
+			//}).then( async res => {
+			//	strapi.log.debug(`SSMQTT Alert inserted UUID:${res.id}`)
+			//	strapi.ssmqtt.publish('nvai/uploadreq', JSON.stringify({fseg: message.id, aid: res.id}));
+			//	//strapi.log.debug(`SSMQTT upload request on UUID:${res.id}`)
+			//});
 
 			// RAW QUERY
 			//strapi.log.debug(`SSMQTT NVAI alert received from ${message.id}`);
