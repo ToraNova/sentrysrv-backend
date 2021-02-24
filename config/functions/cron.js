@@ -26,16 +26,28 @@ module.exports = {
 		});
 	},
 
-	//'* * * * *': () => {
-	'15 12 * * *': () => {
-		strapi.log.info('Alert clearing schedule')
+	//'* * * * *': async () => {
+	'15 12 * * *': async () => {
 		var expr = new Date();
 		expr.setMonth(expr.getMonth() - 3); //3 months ago
 		//expr = expr.getTime() + 5*60000
-		strapi.query('alert').delete({
-			created_at_lt:expr
-		}).then( (res) => {
-			console.log(res);
-		});
+		strapi.log.info(`Alert clearing schedule ${expr.valueOf()}`)
+		var res, tres;
+		res = await strapi.query('alert').delete({
+			created_at_lt:expr.valueOf(),
+			_limit:997
+		})
+		tres = res;
+		res = await strapi.query('alert').delete({
+			created_at_lt:expr.valueOf(),
+			_limit:997
+		})
+		tres = tres.concat(res);
+		res = await strapi.query('alert').delete({
+			created_at_lt:expr.valueOf(),
+			_limit:997
+		})
+		tres = tres.concat(res);
+		strapi.log.info(`cleared ${tres.length} alerts from db`);
 	},
 };
