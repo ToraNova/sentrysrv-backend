@@ -9,15 +9,16 @@ module.exports = {
 	 * Triggered before user creation.
 	 */
 	lifecycles: {
-		//async beforeCreate(data) {
-		//	const res = await strapi.query('alert').count({
-		//		Reason_null: true,
-		//		fence_segment: data.fence_segment
-		//	});
-		//	if(res > 0){
-		//		throw new Error('Insertion disabled by lpass');
-		//	}
-		//},
+		async beforeCreate(data) {
+			const res = await strapi.query('alert').count({
+				Reason_null: true,
+				fence_segment: data.fence_segment
+			});
+			if(res > 0){
+				throw new Error('Insertion disabled by lpass');
+			}
+		},
+
 		async afterCreate (result, data) {
 			//emit a socketio msg to sync with map and focus
 			strapi.io.emit('map/alert/new', JSON.stringify(result))
