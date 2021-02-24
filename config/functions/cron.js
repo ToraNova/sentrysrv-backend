@@ -27,27 +27,18 @@ module.exports = {
 	},
 
 	//'* * * * *': async () => {
-	'15 12 * * *': async () => {
+	'15 12 * * *': async () => { //at 12.15pm everyday
 		var expr = new Date();
 		expr.setMonth(expr.getMonth() - 3); //3 months ago
 		//expr = expr.getTime() + 5*60000
-		strapi.log.info(`Alert clearing schedule ${expr.valueOf()}`)
-		var res, tres;
-		res = await strapi.query('alert').delete({
-			created_at_lt:expr.valueOf(),
-			_limit:997
-		})
-		tres = res;
-		res = await strapi.query('alert').delete({
-			created_at_lt:expr.valueOf(),
-			_limit:997
-		})
-		tres = tres.concat(res);
-		res = await strapi.query('alert').delete({
-			created_at_lt:expr.valueOf(),
-			_limit:997
-		})
-		tres = tres.concat(res);
+		strapi.log.info(`Alert clearing schedule ${expr.valueOf()}`);
+		var tres = [];
+		for(var i=0;i<5;i++){
+			tres = tres.concat( await strapi.query('alert').delete({
+				created_at_lt:expr.valueOf(),
+				_limit:997
+			}) );
+		} //4985, knex or for the fact, ANY fucking orm sucks. or it's just strapi idk
 		strapi.log.info(`cleared ${tres.length} alerts from db`);
 	},
 };
