@@ -55,7 +55,11 @@ module.exports = async () => {
 			const res = await strapi.query('alert').find({
 				Reason_null:true,
 				_limit: msg.count || 10
-			});
+			}
+				//populate the following relations
+				,['fence_segment', 'fence_segment.fence_host','alert_model', 'fence_segment.ip_camera','Attachment']
+
+			);
 			socket.emit('focus/alert/data', JSON.stringify(res));
 		})
 
@@ -76,6 +80,7 @@ module.exports = async () => {
 			const seg = await strapi.query('fence-segment').findOne({ id: msg.fseg || 0});
 			if(seg === null ){
 				strapi.log.warn(`focus/live segment id ${msg.fset} doesn\'t exist`);
+				return;
 			}
 
 			if(seg.ip_camera === null){
