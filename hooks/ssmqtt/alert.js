@@ -1,7 +1,10 @@
 // Alert handler module
 
 const axios = require('axios').default
+const axiosRetry = require('axios-retry')
 const fhandle = require('./file.js')
+
+axiosRetry(axios, {retries: 10, retryDelay: axiosRetry.exponentialDelay});
 
 module.exports = async (topic, message, strapi) => {
 	if( message.id == null || message.branch == null || message.type == null ){

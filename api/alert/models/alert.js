@@ -4,6 +4,22 @@
  * Lifecycle callbacks for the `alert` model.
  */
 
+function isIterable(obj) {
+	// checks for null and undefined
+	if (obj == null) {
+		return false;
+	}
+	return typeof obj[Symbol.iterator] === 'function';
+}
+
+async function deleteAttach(r){
+	for(var af of r.Attachment){
+		//delete the file
+		const file = await strapi.plugins.upload.services.upload.fetch({ id: af.id });
+		await strapi.plugins.upload.services.upload.remove(file);
+	}
+}
+
 module.exports = {
 	/**
 	 * Triggered before user creation.
@@ -30,13 +46,16 @@ module.exports = {
 			strapi.ssmqtt.publish('nvai/clear', JSON.stringify({fseg: result.fence_segment.id}));
 		},
 		async afterDelete(result, params) {
+			if(!isIterable(result)){
+				strapi.ssmqtt.publish('nvai/clear', JSON.stringify({fseg: result.fence_segment.id}));
+				await deleteAttach(result);
+				return;
+			}
+
+			//iterable
 			for(var r of result){
 				strapi.ssmqtt.publish('nvai/clear', JSON.stringify({fseg: r.fence_segment.id}));
-				for(var af of r.Attachment){
-					//delete the file
-					const file = await strapi.plugins.upload.services.upload.fetch({ id: af.id });
-					await strapi.plugins.upload.services.upload.remove(file);
-				}
+				await deleteAttach(r);
 			}
 		},
 	},

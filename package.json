@@ -11,6 +11,7 @@
   },
   "devDependencies": {},
   "dependencies": {
+    "axios-retry": "^3.1.9",
     "bluebird": "^3.7.2",
     "jquery": "1.9.1",
     "knex": "^0.20.0",
