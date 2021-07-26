@@ -26,6 +26,13 @@ module.exports = {
 		});
 	},
 
+    // refresh the ai half-day
+	//'* * * * *': async () => {
+	'0 */12 * * *': async () => {
+		strapi.log.info('AI all clear refresh.')
+		strapi.ssmqtt.publish('nvai/re', '.')
+    },
+
 	//'* * * * *': async () => {
 	'15 12 * * *': async () => { //at 12.15pm everyday
 		var expr = new Date();
