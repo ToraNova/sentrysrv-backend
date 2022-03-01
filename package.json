@@ -21,7 +21,7 @@
     "popper.js": "^1.16.1",
     "socketio": "^1.0.0",
     "sqlite3": "latest",
-    "strapi": "3.1.6",
+    "strapi": "3.6.8",
     "strapi-admin": "3.1.6",
     "strapi-connector-bookshelf": "3.1.6",
     "strapi-plugin-content-manager": "3.1.6",
